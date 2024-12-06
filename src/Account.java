@@ -43,18 +43,29 @@ public class Account {
     }
 
     //borrowedBooks setter
-    public void setBorrowedBooks(List<Book> borrowedBooks){
+    public void setBorrowedBooks(ArrayList<Book> borrowedBooks){
         this.borrowedBooks=borrowedBooks;
     }
 
     //borrow book
     public void borrowBook(Book book){
-        borrowedBooks.add(book);
+        if (book.isBorrowed==true){
+            System.out.println("Book is already borrowed");
+            return;
+        }
+        else{
+            borrowedBooks.add(book);
+            book.isBorrowed=true;
+            book.borrowedBy=this.id;
+        }
+
     }
 
-    //borrow book
+    //return book
     public void returnBook(Book book){
         borrowedBooks.remove(book);
+        book.isBorrowed=false;
+        book.borrowedBy=0;
     }
 
 }

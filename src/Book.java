@@ -73,25 +73,8 @@ public void setIsBorrowed(boolean isBorrowed){
 }
 
 //borrowedBy getter
-public String getBorrowedBy(){
+public int getBorrowedBy(){
     return borrowedBy;
-}
-
-//borrowedBy setter
-public void setBorrowedBy(String borrowedBy){
-    this.borrowedBy=borrowedBy;
-}
-
-//borrow Book
-public void borrowBook(){
-    if(isBorrowed=true){
-        System.out.println("This book has already been checked out by someone else!");
-    }
-    else{
-        isBorrowed=true;
-        borrowedBy=Account.id;
-        System.out.println("You have successfully checked out this book!");
-    }
 }
 
 }
