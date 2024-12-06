@@ -7,6 +7,7 @@ public class Book {
     public int yearofpublication;
     public String genre;
     public boolean isBorrowed=false;
+    public String borrowedBy;
 
 
 //getters and setters
@@ -61,6 +62,26 @@ public void setGenre(String genre){
     this.genre=genre;
 }
 
+//isBorrowed getter
+public boolean getIsBorrowed(){
+    return isBorrowed;
+}
+
+//isBorrowed setter
+public void setIsBorrowed(boolean isBorrowed){
+    this.isBorrowed=isBorrowed;
+}
+
+//borrowedBy getter
+public String getBorrowedBy(){
+    return borrowedBy;
+}
+
+//borrowedBy setter
+public void setBorrowedBy(String borrowedBy){
+    this.borrowedBy=borrowedBy;
+}
+
 //borrow Book
 public void borrowBook(){
     if(isBorrowed=true){
@@ -68,6 +89,7 @@ public void borrowBook(){
     }
     else{
         isBorrowed=true;
+        borrowedBy=User.id;
         System.out.println("You have successfully checked out this book!");
     }
 }
