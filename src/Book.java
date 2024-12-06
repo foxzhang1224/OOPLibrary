@@ -7,7 +7,7 @@ public class Book {
     public int yearofpublication;
     public String genre;
     public boolean isBorrowed=false;
-    public String borrowedBy;
+    public int borrowedBy;
 
 
 //getters and setters
