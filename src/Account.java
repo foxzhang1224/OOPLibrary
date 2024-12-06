@@ -1,15 +1,18 @@
 package src;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Account {
-    static int id;
+    static int idcounter=1;
+    public int id=1;
     public String name;
-    public List<Book> borrowedBooks;
+    public ArrayList<Book> borrowedBooks;
 
     public Account(String name) {
         this.name=name;
         this.id=id++;
+        this.borrowedBooks=new ArrayList<Book>();
     }
 
     //setters and getters
