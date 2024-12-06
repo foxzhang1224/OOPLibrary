@@ -2,7 +2,9 @@
 
 # Contributers:
 [Daniel Brito](https://github.com/danny031103)
+
 [Fox Zhang](https://github.com/foxzhang1224)
+
 [Povilas Zinkevicius]()
 
 # Project Overview
