@@ -6,48 +6,48 @@ public class Book {
     public String author;
     public int yearofpublication;
     public String genre;
-    public boolean isBorrowed;
+    public boolean isBorrowed=false;
 
 
 //getters and setters
 
 //id getter
-public int getId() {
+public int getId(){
     return id;
 }
 
 //id setter
-public void setId(int id) {
+public void setId(int id){
     this.id=id;
 }
 
 //title getter
-public String getTitle() {
+public String getTitle(){
     return title;
 }
 
 //title setter
-public void setTitle(String title) {
+public void setTitle(String title){
     this.title=title;
 }
 
 //author getter
-public String getAuthor() {
+public String getAuthor(){
     return author;
 }
 
 //author setter
-public void setAuthor(String author) {
+public void setAuthor(String author){
     this.author=author;
 }
 
 //year getter
-public int getYear() {
+public int getYear(){
     return yearofpublication;
 }
 
 //year setter
-public void setYear(int yearofpublication) {
+public void setYear(int yearofpublication){
     this.yearofpublication=yearofpublication;
 }
 
@@ -57,8 +57,19 @@ public String getGenre() {
 }
 
 //genre setter
-public void setGenre(String genre) {
+public void setGenre(String genre){
     this.genre=genre;
+}
+
+//borrow Book
+public void borrowBook(){
+    if(isBorrowed=true){
+        System.out.println("This book has already been checked out by someone else!");
+    }
+    else{
+        isBorrowed=true;
+        System.out.println("You have successfully checked out this book!");
+    }
 }
 
 }
