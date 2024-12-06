@@ -89,7 +89,7 @@ public void borrowBook(){
     }
     else{
         isBorrowed=true;
-        borrowedBy=User.id;
+        borrowedBy=Account.id;
         System.out.println("You have successfully checked out this book!");
     }
 }
