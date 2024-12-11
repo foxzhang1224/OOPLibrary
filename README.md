@@ -13,8 +13,11 @@ Design and implement a Library Management System with a GUI that enables users t
 # Project Proposal 
 [Link](https://docs.google.com/document/d/10YCZHaRu4rWZSDCgE_E0yFRvYMaokkx4pkGvDECP9Z8/edit?usp=sharing)
 
+# Use Case Diagram
+![image info](./images/UseCaseDiagrams.jpg)
+
 # Use Case Table
-[Link]()
+![image info](./images/UseCaseDesc_finalproj.jpg)
 
 # Class Diagram
 [Link]()
@@ -22,5 +25,4 @@ Design and implement a Library Management System with a GUI that enables users t
 # Sequence Diagram
 [Link]()
 
-# Use Case Diagram
-[Link]()
+
