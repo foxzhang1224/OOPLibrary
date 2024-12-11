@@ -1,71 +1,44 @@
 package src;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class Account {
-    static int idcounter=1;
-    public int id=1;
-    public String name;
-    public ArrayList<Book> borrowedBooks;
+    private static int idCounter=1;
+    private int id;
+    private String name;
+    private ArrayList<Integer> borrowedBookIds;
 
     public Account(String name) {
+        this.id=idCounter++;
         this.name=name;
-        this.id=id++;
-        this.borrowedBooks=new ArrayList<Book>();
+        this.borrowedBookIds=new ArrayList<>();
     }
 
-    //setters and getters
-
-    //id getter
-    public int getId(){
+    public int getId() {
         return id;
     }
 
-    //id setter
-    public void setId(int id){
-        this.id=id;
-    }
-
-    //name getter
-    public String getName(){
+    public String getName() {
         return name;
     }
 
-    //name setter
-    public void setName(String name){
-        this.name=name;
+    public ArrayList<Integer> getBorrowedBookIds() {
+        return borrowedBookIds;
     }
 
-    //borrowedBooks getter
-    public List<Book> getBorrowedBooks(){
-        return borrowedBooks;
-    }
-
-    //borrowedBooks setter
-    public void setBorrowedBooks(ArrayList<Book> borrowedBooks){
-        this.borrowedBooks=borrowedBooks;
-    }
-
-    //borrow book
-    public void borrowBook(Book book){
-        if (book.isBorrowed==true){
-            System.out.println("Book is already borrowed");
-            return;
+    public void borrowBook(Book book) {
+        if (!book.isBorrowed()) {
+            book.setBorrowed(true);
+            book.setBorrowerId(this.id);
+            borrowedBookIds.add(book.getId());
         }
-        else{
-            borrowedBooks.add(book);
-            book.isBorrowed=true;
-            book.borrowedBy=this.id;
+    }
+
+    public void returnBook(Book book) {
+        if (borrowedBookIds.contains(book.getId())) {
+            book.setBorrowed(false);
+            book.setBorrowerId(-1);
+            borrowedBookIds.remove(Integer.valueOf(book.getId()));
         }
-
     }
-
-    //return book
-    public void returnBook(Book book){
-        borrowedBooks.remove(book);
-        book.isBorrowed=false;
-        book.borrowedBy=0;
-    }
-
 }

@@ -1,88 +1,74 @@
 package src;
 
 public class Book {
-    static int idcounter=1;
-    public int id;
-    public String title;
-    public String author;
-    public String yearofpublication;
-    public String genre;
-    public boolean isBorrowed=false;
-    public int borrowedBy;
+    private static int lastID=1;
+    private int id;
+    private String title;
+    private String author;
+    private String yearOfPublication;
+    private String genre;
+    private boolean availability;
+    private int borrowerId;
 
-    public Book(String title, String author, String yearofpublication, String genre){
+    public Book(String title, String author, String yearOfPublication, String genre) {
+        this.id=lastID++;
         this.title=title;
         this.author=author;
-        this.yearofpublication=yearofpublication;
+        this.yearOfPublication=yearOfPublication;
         this.genre=genre;
-        this.id=idcounter++;
+        this.availability=false;
+        this.borrowerId=-1;
     }
 
-//getters and setters
+    public int getId() {
+        return id;
+    }
 
-//id getter
-public int getId(){
-    return id;
-}
+    public String getTitle() {
+        return title;
+    }
 
-//id setter
-public void setId(int id){
-    this.id=id;
-}
+    public void setTitle(String title) {
+        this.title=title;
+    }
 
-//title getter
-public String getTitle(){
-    return title;
-}
+    public String getAuthor() {
+        return author;
+    }
 
-//title setter
-public void setTitle(String title){
-    this.title=title;
-}
+    public void setAuthor(String author) {
+        this.author=author;
+    }
 
-//author getter
-public String getAuthor(){
-    return author;
-}
+    public String getYearOfPublication() {
+        return yearOfPublication;
+    }
 
-//author setter
-public void setAuthor(String author){
-    this.author=author;
-}
+    public void setYearOfPublication(String yearOfPublication) {
+        this.yearOfPublication=yearOfPublication;
+    }
 
-//year getter
-public String getYear(){
-    return yearofpublication;
-}
+    public String getGenre() {
+        return genre;
+    }
 
-//year setter
-public void setYear(String yearofpublication){
-    this.yearofpublication=yearofpublication;
-}
+    public void setGenre(String genre) {
+        this.genre=genre;
+    }
 
-//genre getter
-public String getGenre() {
-    return genre;
-}
+    public boolean isBorrowed() {
+        return availability;
+    }
 
-//genre setter
-public void setGenre(String genre){
-    this.genre=genre;
-}
+    public void setBorrowed(boolean borrowed) {
+        availability=borrowed;
+    }
 
-//isBorrowed getter
-public boolean getIsBorrowed(){
-    return isBorrowed;
-}
+    public int getBorrowerId() {
+        return borrowerId;
+    }
 
-//isBorrowed setter
-public void setIsBorrowed(boolean isBorrowed){
-    this.isBorrowed=isBorrowed;
-}
-
-//borrowedBy getter
-public int getBorrowedBy(){
-    return borrowedBy;
-}
-
+    public void setBorrowerId(int borrowerId) {
+        this.borrowerId=borrowerId;
+    }
 }

@@ -4,94 +4,102 @@ import java.io.*;
 import java.util.ArrayList;
 
 public class Datafile {
-    private static final String BOOKS_FILE="bookdata.txt";
-    private static final String ACCOUNTS_FILE="user_info.txt";
+    private static final String BOOKS_FILE = "bookdata.txt";
+    private static final String ACCOUNTS_FILE = "userdata.txt";
 
-    public static ArrayList<Book> loadBooks(){
+    public static ArrayList<Book> loadBooks() {
         ArrayList<Book> books=new ArrayList<>();
-        try (BufferedReader reader=new BufferedReader(new FileReader(BOOKS_FILE))) {
-            String line;
-            while ((line = reader.readLine()) != null) {
-                String[] parts=line.split(",");
-                String title=parts[0].trim();
-                String author=parts[1].trim();
-                String year=parts[2].trim();
-                String genre=parts[3].trim();
-                boolean isBorrowed=Boolean.parseBoolean(parts[4].trim());
-                int borrowedBy=Integer.parseInt(parts[5].trim());
+        try (FileReader fileReader=new FileReader(BOOKS_FILE)) {
+            String content="";
+            int character;
+
+            while ((character=fileReader.read())!=-1) {
+                content+=(char) character;
+            }
+
+            String[] lines=content.split(System.lineSeparator());
+            for (String line:lines) {
+                if (line.trim().isEmpty()){
+                    continue;
+                }
+                String[] info=line.split(",");
+                String title=info[0].trim();
+                String author=info[1].trim();
+                String year=info[2].trim();
+                String genre=info[3].trim();
+                boolean isBorrowed=Boolean.parseBoolean(info[4].trim());
+                int borrowerId=Integer.parseInt(info[5].trim());
 
                 Book book=new Book(title, author, year, genre);
-                book.setIsBorrowed(isBorrowed);
-                book.borrowedBy = borrowedBy; 
+                book.setBorrowed(isBorrowed);
+                book.setBorrowerId(borrowerId);
                 books.add(book);
             }
-        } 
-        catch (IOException e) {
+        } catch (IOException e) {
             System.out.println("Error reading books: "+e.getMessage());
         }
         return books;
     }
 
-    public static ArrayList<Account> loadAccounts(ArrayList<Book> books){
+    public static ArrayList<Account> loadAccounts() {
         ArrayList<Account> accounts=new ArrayList<>();
-        try (BufferedReader reader=new BufferedReader(new FileReader(ACCOUNTS_FILE))){
-            String line;
-            while ((line=reader.readLine()) != null){
-                String[] parts=line.split(",");
-                String name=parts[0].trim();
+        try (FileReader fileReader=new FileReader(ACCOUNTS_FILE)) {
+            String content="";
+            int character;
+            while ((character=fileReader.read())!=-1) {
+                content+=(char) character;
+            }
+            String[] lines=content.split(System.lineSeparator());
+            for (String line : lines) {
+                if (line.trim().isEmpty()){
+                    continue;
+                }
+                String[] info=line.split(",");
+                String name=info[0].trim();
                 Account account=new Account(name);
 
-                if (parts.length>1&&!parts[1].trim().isEmpty()){
-                    for (String bookIdStr:parts[1].split(";")) {
+                if (info.length>1&&!info[1].trim().isEmpty()){
+                    for (String bookIdStr:info[1].split(";")) {
                         int bookId=Integer.parseInt(bookIdStr.trim());
-                        for (Book book:books) {
-                            if (book.getId()==bookId){
-                                account.borrowBook(book);
-                            }
-                        }
+                        account.getBorrowedBookIds().add(bookId);
                     }
                 }
                 accounts.add(account);
             }
-        } 
-        catch (IOException e){
+        } catch (IOException e) {
             System.out.println("Error reading accounts: "+e.getMessage());
         }
         return accounts;
     }
 
-    public static void saveBooks(ArrayList<Book> books) {
-        try (BufferedWriter writer=new BufferedWriter(new FileWriter(BOOKS_FILE))) {
-            for (Book book:books) {
-                writer.write(book.getTitle()+","+
-                             book.getAuthor()+","+
-                             book.getYear()+","+
-                             book.getGenre()+","+
-                             book.getIsBorrowed()+","+
-                             book.getBorrowedBy());
-                writer.newLine();
+    public static void saveBooks(ArrayList<Book> books){
+        try (FileWriter writer = new FileWriter(BOOKS_FILE)){
+            for (Book book : books){
+                String bookData=book.getTitle()+","+book.getAuthor()+","+book.getYearOfPublication()+","
+                        +book.getGenre()+","+book.isBorrowed()+","+book.getBorrowerId()
+                        +System.lineSeparator();
+                writer.write(bookData);
             }
         } 
-        catch (IOException e){
+        catch (IOException e) {
             System.out.println("Error saving books: "+e.getMessage());
         }
     }
 
-    public static void saveAccounts(ArrayList<Account> accounts){
-        try (BufferedWriter writer=new BufferedWriter(new FileWriter(ACCOUNTS_FILE))){
-            for (Account account:accounts){
-                StringBuilder borrowedBooksStr=new StringBuilder();
-                for (Book book:account.getBorrowedBooks()){
-                    borrowedBooksStr.append(book.getId()).append(";");
+    public static void saveAccounts(ArrayList<Account> accounts) {
+        try (FileWriter writer=new FileWriter(ACCOUNTS_FILE)) {
+            for (Account account : accounts) {
+                String borrowedBookIds="";
+                for (int bookId : account.getBorrowedBookIds()) {
+                    borrowedBookIds+=bookId + ";";
                 }
-                if (borrowedBooksStr.length()>0){
-                    borrowedBooksStr.deleteCharAt(borrowedBooksStr.length()-1);
+                if (!borrowedBookIds.isEmpty()) {
+                    borrowedBookIds=borrowedBookIds.substring(0, borrowedBookIds.length() - 1);
                 }
-                writer.write(account.getName()+","+borrowedBooksStr);
-                writer.newLine();
+                writer.write(account.getName() + "," + borrowedBookIds + System.lineSeparator());
             }
         } 
-        catch (IOException e){
+        catch (IOException e) {
             System.out.println("Error saving accounts: "+e.getMessage());
         }
     }
