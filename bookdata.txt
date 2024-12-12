@@ -1,5 +1,12 @@
-Bible,Louis,2017,God,true,1
+Book,Louis,2017,God,true,1
 Disney,Walt,1951,Anime,true,2
-Test,Me,2024,Action,false,-1
-Test2,Me2,2023,Fiction,false,-1
-Hi,Louis,2027,Byebye,true,1
+OtherBook,Me,2024,Action,false,-1
+Booook,Guy,2023,Fiction,false,-1
+Hi,Girl,2027,Byebye,true,1
+To Kill a Mockingbird,Lee,1960,Fiction,false,-1
+The Great Gatsby,Fitzgerald,1925,Classic,false,-1
+Moby Dick,Melville,1851,Adventure,true,1
+Pride and Prejudice,Austen,1813,Romance,false,-1
+The Catcher in the Rye,Salinger,1951,Fiction,false,-1
+The Lord of the Rings,Tolkien,1954,Fantasy,false,-1
+Harry Potter,Rowling,1997,Fantasy,true,2
